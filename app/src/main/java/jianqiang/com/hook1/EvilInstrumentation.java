@@ -38,8 +38,17 @@ public class EvilInstrumentation extends Instrumentation {
                 Intent.class, int.class, Bundle.class};
         Object[] v1 = {who, contextThread, token, target,
                 intent, requestCode, options};
+
         return (ActivityResult) RefInvoke.invokeInstanceMethod(
                 mBase, "execStartActivity", p1, v1);
+    }
+
+    public Activity newActivity(ClassLoader cl, String className,
+                                Intent intent)
+            throws InstantiationException, IllegalAccessException,
+            ClassNotFoundException {
+
+        return mBase.newActivity(cl, className, intent);
     }
 }
 
